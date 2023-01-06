@@ -1,0 +1,9 @@
+vanthang  111111	admin
+vanthangq  123456	user
+vanthang1  123456	user
+thang  111111	user
+quan1  123456	user
+quan3  123456	user
+quan4  123456	user
+quan6  123456	user
+thao  123456	admin

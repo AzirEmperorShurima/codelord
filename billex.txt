@@ -1,0 +1,2 @@
+jLabel1  small	600000.0  20
+jLabel1  big	1800000.0  30
