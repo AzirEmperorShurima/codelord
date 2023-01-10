@@ -29,15 +29,16 @@ public class admin extends javax.swing.JFrame {
     private void fomat() {
         this.setLocationRelativeTo(null);
         setTitle(" Cheems Lord Coffed ");
-        getContentPane().setBackground(Color.pink);
+        getContentPane().setBackground(Color.BLACK);
+        jButton1.setText(" Log Out ");
         jLabel1.setText("System Administrator Interface");
-        jLabel1.setForeground(Color.red);
+        jLabel1.setForeground(Color.white);
         jLabel1.setBackground(Color.yellow);
         inf.setText("Employee Manager");
         inf.setForeground(Color.blue);
         inf.setBackground(Color.yellow);
         inf.setFont(new Font("Time New Roman", Font.BOLD, 15));
-        price.setBackground(Color.black);
+        price.setBackground(Color.white);
         price.setText(" Price Management ");
         price.setForeground(Color.red);
         price.setFont(new Font("Time New Roman", Font.BOLD, 15));
@@ -58,9 +59,11 @@ public class admin extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         inf = new javax.swing.JButton();
         price = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        jLabel1.setBackground(new java.awt.Color(255, 0, 0));
         jLabel1.setText("ADMIN Constructor");
 
         inf.setText("read");
@@ -77,31 +80,44 @@ public class admin extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(92, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(53, 53, 53)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(54, 54, 54)
                 .addComponent(price)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(inf)
-                .addGap(59, 59, 59))
+                .addGap(57, 57, 57))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(136, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(82, 82, 82))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(222, 222, 222)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
-                .addGap(47, 47, 47)
+                .addGap(67, 67, 67)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(price)
                     .addComponent(inf))
-                .addContainerGap(196, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(64, 64, 64))
         );
 
         pack();
@@ -110,12 +126,20 @@ public class admin extends javax.swing.JFrame {
     private void infActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_infActionPerformed
         information in = new information();
         in.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_infActionPerformed
 
     private void priceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_priceActionPerformed
         price p = new price();
         p.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_priceActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        login lg = new login();
+        lg.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -154,6 +178,7 @@ public class admin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton inf;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton price;
     // End of variables declaration//GEN-END:variables

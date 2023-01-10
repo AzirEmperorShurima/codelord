@@ -6,6 +6,8 @@ package background;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.List;
@@ -30,8 +32,38 @@ public class coffe extends javax.swing.JDialog {
         initComponents();
         users = (user) parent;
         setLocationRelativeTo(null);
-        showdata1();
+        showdatae();
         fomat();
+        name.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                String choose = (String) name.getSelectedItem();
+                String type = (String) size.getSelectedItem();
+                try {
+                    Scanner sc = new Scanner(new FileReader("cfe.txt"));
+                    while (sc.hasNextLine()) {
+                        String temp = sc.next();
+                        if (temp.equals(choose)) {
+                            if (type.equalsIgnoreCase("normal")) {
+                                cost.setText(sc.next());
+                            } else if (type.equalsIgnoreCase("big")) {
+                                int tem = Integer.parseInt(sc.next()) + 10000;
+                                String pr = Integer.toString(tem);
+                                cost.setText(pr);
+
+                            } else {
+                                int tem = Integer.parseInt(sc.next()) - 5000;
+                                String pr = Integer.toString(tem);
+                                cost.setText(pr);
+                            }
+
+                        }
+//            
+                    }
+                } catch (Exception e) {
+                }
+            }
+        });
+        size.addActionListener(name);
         try {
             Scanner sc = new Scanner(new FileReader("cfe.txt"));
             while (sc.hasNextLine()) {
@@ -58,13 +90,14 @@ public class coffe extends javax.swing.JDialog {
         close.setForeground(Color.yellow);
     }
 
-    private void showdata1() {
-        List<String> data = size_box.getdata();
+    private void showdatae() {
+        List<String> data = source_price.getsprice();
         for (String string : data) {
             size.addItem(string);
         }
     }
-     private static boolean isNumeric(String str) {
+
+    private static boolean isNumeric(String str) {
         try {
             Integer.parseInt(str);
             return true;
@@ -88,7 +121,6 @@ public class coffe extends javax.swing.JDialog {
         add = new javax.swing.JButton();
         close = new javax.swing.JButton();
         name = new javax.swing.JComboBox<>();
-        display = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -110,13 +142,6 @@ public class coffe extends javax.swing.JDialog {
             }
         });
 
-        display.setText("jButton1");
-        display.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                displayActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -125,26 +150,21 @@ public class coffe extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(display)
-                        .addGap(38, 38, 38)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(close)
-                            .addComponent(add))
-                        .addGap(1, 1, 1))
+                            .addComponent(add)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap(309, Short.MAX_VALUE)
-                                .addComponent(cost, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(56, 56, 56))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(151, 151, 151)
-                                .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(num, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(size, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(116, 116, 116))
+                        .addContainerGap(309, Short.MAX_VALUE)
+                        .addComponent(cost, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(56, 56, 56)
+                        .addComponent(num, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(117, 117, 117))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(151, 151, 151)
+                .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(size, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -158,9 +178,7 @@ public class coffe extends javax.swing.JDialog {
                     .addComponent(num, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(40, 40, 40)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(add)
-                    .addComponent(display))
+                .addComponent(add)
                 .addGap(18, 18, 18)
                 .addComponent(close)
                 .addContainerGap(63, Short.MAX_VALUE))
@@ -198,27 +216,6 @@ public class coffe extends javax.swing.JDialog {
         dispose();
         // TODO add your handling code here:
     }//GEN-LAST:event_closeActionPerformed
-
-    private void displayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_displayActionPerformed
-        // TODO add your handling code here:
-          String choose = (String) name.getSelectedItem();
-        int count = name.getItemCount();
-        String[] nameItem = new String[count];
-        String[] money = new String[count];
-        try {
-            Scanner sc = new Scanner(new FileReader("cfe.txt"));
-            while (sc.hasNextLine()) {
-                String temp = sc.next();
-                if (temp.equals(choose)) {
-                    cost.setText(sc.next());
-                }
-//            
-            }
-        } catch (Exception e) {
-        }
-
-
-    }//GEN-LAST:event_displayActionPerformed
 
     /**
      * @param args the command line arguments
@@ -266,7 +263,6 @@ public class coffe extends javax.swing.JDialog {
     private javax.swing.JButton add;
     private javax.swing.JButton close;
     private javax.swing.JTextField cost;
-    private javax.swing.JButton display;
     private javax.swing.JComboBox<String> name;
     private javax.swing.JTextField num;
     private javax.swing.JComboBox<String> size;

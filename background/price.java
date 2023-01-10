@@ -6,10 +6,15 @@ package background;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.PrintStream;
 import java.util.List;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
@@ -23,10 +28,16 @@ public class price extends javax.swing.JFrame {
     /**
      * Creates new form price
      */
+    private DefaultTableModel model;
+    private String milktea1 = "milktea";
+    private String cf = "coffee";
+    private String ck = "cake";
+
     public price() {
         initComponents();
         setfomat();
         showdata1();
+
         try {
             Scanner sc = new Scanner(new FileReader("price.txt"));
             DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
@@ -44,8 +55,12 @@ public class price extends javax.swing.JFrame {
 
     private void setfomat() {
         this.setLocationRelativeTo(null);
+        previous.setText(" Previous Page ");
+        previous.setFont(new Font("Time New Roman", Font.BOLD, 15));
+        previous.setForeground(Color.WHITE);
+        previous.setBackground(Color.black);
         setTitle(" Commodity Price Management ");
-        getContentPane().setBackground(Color.pink);
+        getContentPane().setBackground(Color.WHITE);
         jLabel1.setText("Item's Name :");
         jLabel1.setForeground(Color.red);
         jLabel2.setText("Price :");
@@ -55,23 +70,36 @@ public class price extends javax.swing.JFrame {
         jLabel3.setBounds(200, 100, 300, 150);
         jLabel3.setForeground(Color.red);
         jLabel3.setBackground(Color.blue);
+        jLabel4.setText(" Type ");
+
+        jLabel4.setFont(new Font("Time New Roman", Font.BOLD, 12));
         txtfind.setText("");
+        delete.setForeground(Color.red);
+        delete.setFont(new Font("Time New Roman", Font.BOLD, 15));
+        update.setForeground(Color.red);
+        update.setFont(new Font("Time New Roman", Font.BOLD, 15));
         reset.setForeground(Color.red);
+        reset.setFont(new Font("Time New Roman", Font.BOLD, 15));
         name1.setText("");
         name1.setForeground(Color.red);
         price1.setText("");
         addnew.setText("Add New ");
         addnew.setForeground(Color.red);
+        addnew.setFont(new Font("Time New Roman", Font.BOLD, 15));
         save.setText(" Save ");
         save.setForeground(Color.red);
+        save.setFont(new Font("Time New Roman", Font.BOLD, 15));
         find.setText(" Find ");
+        find.setFont(new Font("Time New Roman", Font.BOLD, 15));
         find.setForeground(Color.red);
         jTable1.setOpaque(true);
+        jTable1.setFont(new Font("Time New Roman", Font.BOLD, 15));
         jTable1.setFillsViewportHeight(true);
-        jTable1.setForeground(Color.yellow);
-        jTable1.setBackground(Color.red);
+        jTable1.setForeground(Color.black);
+        jTable1.setBackground(Color.yellow);
         jTable1.getTableHeader().setForeground(Color.red);
         jTable1.getTableHeader().setOpaque(true);
+        jTable1.getTableHeader().setFont(new Font("Time New Roman", Font.BOLD, 15));
         //   jTable1.getTableHeader().setBackground(Color.red);
 
     }
@@ -108,8 +136,9 @@ public class price extends javax.swing.JFrame {
         update = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         type = new javax.swing.JComboBox<>();
+        previous = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -182,14 +211,17 @@ public class price extends javax.swing.JFrame {
 
         jLabel4.setText("jLabel4");
 
+        previous.setText("jButton1");
+        previous.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                previousActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 107, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(128, 128, 128))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -222,19 +254,37 @@ public class price extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(find)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtfind, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(txtfind, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(180, 180, 180)
+                        .addGap(24, 24, 24)
+                        .addComponent(previous)
+                        .addGap(81, 81, 81)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(99, Short.MAX_VALUE))
+                .addContainerGap(71, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 539, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jLabel3)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
+                        .addComponent(jLabel3)
+                        .addGap(25, 25, 25)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(reset)
+                            .addComponent(find)
+                            .addComponent(txtfind, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(25, 25, 25)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(delete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(addnew, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(previous)
+                        .addGap(10, 10, 10)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(name1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -242,28 +292,15 @@ public class price extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(price1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(24, 24, 24)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(type, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(reset)
-                            .addComponent(find)
-                            .addComponent(txtfind, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(addnew)
-                            .addComponent(delete))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(type, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(save)
-                            .addComponent(update))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18))
+                            .addComponent(update))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -281,79 +318,47 @@ public class price extends javax.swing.JFrame {
 
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        String t = "milktea";
-        String f = "cafe";
-        boolean checked = false;
         for (int i = 0; i < model.getRowCount(); i++) {
-            String check = (String) model.getValueAt(i, 2);
             try {
                 PrintStream pw = new PrintStream("price.txt");
+                PrintStream pp = new PrintStream("milktea.txt");
+                PrintStream pr = new PrintStream("cfe.txt");
+                PrintStream pa = new PrintStream("cakes.txt");
                 for (i = 0; i < model.getRowCount(); i++) {
+                    String checkk = (String) model.getValueAt(i, 2);
+                    String check = checkk.trim();
                     pw.println(
                             model.getValueAt(i, 0) + "\t"
                             + (model.getValueAt(i, 1) + "").replace(' ', '_') + "  "
                             + model.getValueAt(i, 2)
                     );
+                    if (check.equalsIgnoreCase(milktea1)) {
+                        pp.println(
+                                model.getValueAt(i, 0) + "\t"
+                                + (model.getValueAt(i, 1) + "").replace(' ', '_')
+                        );
+
+                    } else if (check.equalsIgnoreCase(cf)) {
+                        pr.println(
+                                model.getValueAt(i, 0) + "\t"
+                                + (model.getValueAt(i, 1) + "").replace(' ', '_')
+                        );
+                    } else if (check.equalsIgnoreCase(ck)) {
+                        pa.println(
+                                model.getValueAt(i, 0) + "\t"
+                                + (model.getValueAt(i, 1) + "").replace(' ', '_')
+                        );
+                    }
                 }
+                JOptionPane.showMessageDialog(null, "done");
+                
                 pw.close();
-
-                if (check.equalsIgnoreCase(t)) {
-
-                    try {
-                        PrintStream p = new PrintStream("milktea.txt");
-                        for (i = 0; i < model.getRowCount(); i++) {
-                            p.println(
-                                    model.getValueAt(i, 0) + "\t"
-                                    + (model.getValueAt(i, 1) + "").replace(' ', '_')
-                            );
-                        }
-                        p.close();
-                        // JOptionPane.showMessageDialog(null, "Save Data Completed!!!!!!!");
-                        checked = true;
-                    } catch (Exception e) {
-                        
-                    }
-                } else if (check.equalsIgnoreCase(f)) {
-                    try {
-                        PrintStream pd = new PrintStream("cfe.txt");
-                        for (i = 0; i < model.getRowCount(); i++) {
-                            pd.println(
-                                    model.getValueAt(i, 0) + "\t"
-                                    + (model.getValueAt(i, 1) + "").replace(' ', '_')
-                            );
-                        }
-                        pd.close();
-                        checked = true;
-                        //  JOptionPane.showMessageDialog(null, "Save Data Completed!!!!!!!");
-                    } catch (Exception e) {
-                       // JOptionPane.showMessageDialog(null, "it item isn't coffee ");
-                    }
-                } else {
-                    try {
-                        PrintStream pq = new PrintStream("cakes.txt");
-                        for (i = 0; i < model.getRowCount(); i++) {
-                            pq.println(
-                                    model.getValueAt(i, 0) + "\t"
-                                    + (model.getValueAt(i, 1) + "").replace(' ', '_')
-                            );
-                        }
-                        pq.close();
-                        checked = true;
-                        // J
-                    } catch (Exception e) {
-                      //  JOptionPane.showMessageDialog(null, "it item isn't cake ");
-                    }
-                }
+                pp.close();
+                pr.close();
+                pa.close();
             } catch (Exception e) {
             }
         }
-        if (checked = true) {
-            JOptionPane.showMessageDialog(null, "Save Data Completed!!!!!!!");
-        }
-        else{
-            JOptionPane.showMessageDialog(null, "Error!!!!!!!");
-        }
-
     }//GEN-LAST:event_saveActionPerformed
 
     private void name1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_name1ActionPerformed
@@ -409,6 +414,13 @@ public class price extends javax.swing.JFrame {
 
     }//GEN-LAST:event_updateActionPerformed
 
+    private void previousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_previousActionPerformed
+        // TODO add your handling code here:
+        admin ad = new admin();
+        ad.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_previousActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -455,6 +467,7 @@ public class price extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField name1;
+    private javax.swing.JButton previous;
     private javax.swing.JTextField price1;
     private javax.swing.JButton reset;
     private javax.swing.JButton save;

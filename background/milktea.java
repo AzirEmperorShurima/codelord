@@ -6,6 +6,8 @@ package background;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.List;
@@ -25,8 +27,6 @@ public class milktea extends javax.swing.JDialog {
     private String namee;
     private String costt;
     private final user users;
-    private String[] nameItem;
-    private String[] money;
 
     public milktea(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -35,6 +35,36 @@ public class milktea extends javax.swing.JDialog {
         users = (user) parent;
         this.setTitle("input some thing ");
         showdata1();
+        name.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                String choose = (String) name.getSelectedItem();
+                String type = (String) size.getSelectedItem();
+                try {
+                    Scanner sc = new Scanner(new FileReader("milktea.txt"));
+                    while (sc.hasNextLine()) {
+                        String temp = sc.next();
+                        if (temp.equals(choose)) {
+                            if (type.equalsIgnoreCase("normal")) {
+                                cost.setText(sc.next());
+                            } else if (type.equalsIgnoreCase("big")) {
+                                int tem = Integer.parseInt(sc.next()) + 10000;
+                                String pr = Integer.toString(tem);
+                                cost.setText(pr);
+
+                            } else {
+                                int tem = Integer.parseInt(sc.next()) - 5000;
+                                String pr = Integer.toString(tem);
+                                cost.setText(pr);
+                            }
+
+                        }
+//            
+                    }
+                } catch (Exception e) {
+                }
+            }
+        });
+        size.addActionListener(name);
 
         try {
             Scanner sc = new Scanner(new FileReader("milktea.txt"));
@@ -62,7 +92,7 @@ public class milktea extends javax.swing.JDialog {
     }
 
     private void format() {
-        getContentPane().setBackground(Color.ORANGE);
+        getContentPane().setBackground(Color.pink);
         getContentPane().setForeground(Color.red);
         jLabel1.setText("Lordland's Milktea");
         jLabel1.setBackground(Color.black);
@@ -70,10 +100,10 @@ public class milktea extends javax.swing.JDialog {
         jLabel1.setForeground(Color.red);
         num.setText("");
         num.setForeground(Color.red);
-        updatecost.setText(" Display Cost ");
+
         cost.setText(" Price Item ");
-        cost.setForeground(Color.pink);
-        cost.setFont(new Font(" ", Font.CENTER_BASELINE, 15));
+        cost.setForeground(new Color(153,153,255));
+        cost.setFont(new Font(" ", Font.ITALIC, 15));
         jLabel2.setIcon(new ImageIcon(getClass().getResource("/background/Icon/price.png")));
         jLabel2.setText("");
         addnew.setText(" Add Item ");
@@ -88,8 +118,6 @@ public class milktea extends javax.swing.JDialog {
         size.setFont(new Font("", Font.BOLD, 15));
         name.setForeground(Color.red);
         name.setFont(new Font(" ", Font.BOLD, 15));
-        updatecost.setForeground(Color.red);
-        updatecost.setBackground(Color.blue);
 
     }
 
@@ -115,7 +143,6 @@ public class milktea extends javax.swing.JDialog {
         size = new javax.swing.JComboBox<>();
         close = new javax.swing.JButton();
         name = new javax.swing.JComboBox<>();
-        updatecost = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
@@ -150,13 +177,6 @@ public class milktea extends javax.swing.JDialog {
             }
         });
 
-        updatecost.setText("jButton1");
-        updatecost.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updatecostActionPerformed(evt);
-            }
-        });
-
         jLabel1.setText("jLabel1");
 
         jLabel2.setText("jLabel2");
@@ -186,8 +206,7 @@ public class milktea extends javax.swing.JDialog {
                 .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(close)
-                    .addComponent(addnew)
-                    .addComponent(updatecost))
+                    .addComponent(addnew))
                 .addGap(51, 51, 51))
         );
         layout.setVerticalGroup(
@@ -208,9 +227,7 @@ public class milktea extends javax.swing.JDialog {
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(close)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(updatecost)
-                .addContainerGap(123, Short.MAX_VALUE))
+                .addContainerGap(158, Short.MAX_VALUE))
         );
 
         pack();
@@ -258,27 +275,6 @@ public class milktea extends javax.swing.JDialog {
 
         this.dispose();
     }//GEN-LAST:event_closeActionPerformed
-
-    private void updatecostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatecostActionPerformed
-        // TODO add your handling code here:
-        String choose = (String) name.getSelectedItem();
-        int count = name.getItemCount();
-        String[] nameItem = new String[count];
-        String[] money = new String[count];
-        try {
-            Scanner sc = new Scanner(new FileReader("milktea.txt"));
-            while (sc.hasNextLine()) {
-                String temp = sc.next();
-                if (temp.equals(choose)) {
-                    cost.setText(sc.next());
-                }
-//            
-            }
-        } catch (Exception e) {
-        }
-
-
-    }//GEN-LAST:event_updatecostActionPerformed
 
     /**
      * @param args the command line arguments
@@ -331,7 +327,6 @@ public class milktea extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> name;
     private javax.swing.JTextField num;
     private javax.swing.JComboBox<String> size;
-    private javax.swing.JButton updatecost;
     // End of variables declaration//GEN-END:variables
 
 }

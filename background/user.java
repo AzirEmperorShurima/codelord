@@ -23,7 +23,7 @@ public class user extends javax.swing.JFrame {
     /**
      * Creates new form user
      */
-    private final milktea t = new milktea(this, true);
+    
     private List<sourceOFmilktea> sOf;
     private DefaultTableModel model;
     private int index;
@@ -50,6 +50,11 @@ public class user extends javax.swing.JFrame {
             jTabbedPane1.setBackgroundAt(i, Color.orange);
             jTabbedPane1.getComponentAt(i).setBackground(Color.orange);
         }
+        delete.setText(" Delete ");
+
+        logout.setText(" Log Out ");
+        logout.setForeground(Color.red);
+        logout.setBackground(Color.BLACK);
         cake.setText(" Super Delicious Cake ");
         cake.setFont(new Font(" ", Font.BOLD, 15));
         cake.setForeground(Color.red);
@@ -72,10 +77,11 @@ public class user extends javax.swing.JFrame {
         btnmilktea.setBackground(milk);
         table.setOpaque(true);
         table.setFillsViewportHeight(true);
-        table.getTableHeader().setForeground(milk);
+        table.getTableHeader().setForeground(Color.RED);
         table.getTableHeader().setFont(new Font("", Font.BOLD, 15));
         table.setRowHeight(20, 20);
-        table.setGridColor(Color.red);
+        table.setGridColor(Color.black);
+        table.setFont(new Font("Time New Roman", Font.BOLD, 17));
         table.setBackground(new Color(255, 204, 204));
     }
 
@@ -98,6 +104,7 @@ public class user extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenu1 = new javax.swing.JMenu();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         btnmilktea = new javax.swing.JButton();
@@ -106,7 +113,11 @@ public class user extends javax.swing.JFrame {
         table = new javax.swing.JTable();
         save = new javax.swing.JButton();
         cake = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
+        delete = new javax.swing.JButton();
+        bill = new javax.swing.JButton();
+        logout = new javax.swing.JButton();
+
+        jMenu1.setText("jMenu1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("fbvcbc");
@@ -153,74 +164,121 @@ public class user extends javax.swing.JFrame {
             }
         });
 
+        delete.setText("jButton1");
+        delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteActionPerformed(evt);
+            }
+        });
+
+        bill.setText("bill");
+        bill.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                billActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(249, 249, 249)
-                .addComponent(btnmilktea)
-                .addGap(18, 18, 18)
-                .addComponent(cafe)
-                .addGap(18, 18, 18)
-                .addComponent(cake)
-                .addContainerGap(455, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(delete)
+                .addGap(18, 18, 18)
+                .addComponent(save)
+                .addGap(44, 44, 44)
+                .addComponent(bill)
+                .addGap(256, 256, 256))
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(save)
-                        .addGap(246, 246, 246))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 750, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(133, 133, 133))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(249, 249, 249)
+                        .addComponent(btnmilktea)
+                        .addGap(18, 18, 18)
+                        .addComponent(cafe)
+                        .addGap(18, 18, 18)
+                        .addComponent(cake))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(61, 61, 61)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 750, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(66, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(63, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnmilktea)
                     .addComponent(cafe)
                     .addComponent(cake))
                 .addGap(8, 8, 8)
-                .addComponent(save)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(save)
+                    .addComponent(delete)
+                    .addComponent(bill))
+                .addGap(10, 10, 10)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         jTabbedPane1.addTab("Order some thing ", jPanel2);
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 956, Short.MAX_VALUE)
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 463, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("Table Information", jPanel4);
+        logout.setText("jButton1");
+        logout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(47, 47, 47)
-                .addComponent(jTabbedPane1)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(logout))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 879, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 496, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(logout)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 558, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutActionPerformed
+        // TODO add your handling code here:
+        login lg = new login();
+        lg.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_logoutActionPerformed
+
+    private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        int i_row = table.getSelectedRow();
+        int luaChon = JOptionPane.showConfirmDialog(this, "Bạn có chắn chắn xóa dòng đã chọn?");
+        if (luaChon == JOptionPane.YES_OPTION) {
+
+            model.removeRow(i_row);
+        }
+    }//GEN-LAST:event_deleteActionPerformed
+    private final  cake n = new cake(this, rootPaneCheckingEnabled);
+    private void cakeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cakeActionPerformed
+        // TODO add your handling code here:
+
+        n.setVisible(true);
+    }//GEN-LAST:event_cakeActionPerformed
 
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
         // TODO add your handling code here:
@@ -240,39 +298,23 @@ public class user extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "error");
         }
     }//GEN-LAST:event_saveActionPerformed
-
-    private void btnmilkteaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmilkteaActionPerformed
-
-        /*try{
-            Scanner sc = new Scanner(new FileReader("price.txt"));
-            DefaultTableModel model = (DefaultTableModel) jTable3.getModel();
-            //Ho tro them dong vao Table tren giao dien
-            while(sc.hasNext()){
-                model.addRow(new Object[]{
-                    sc.next(), //Ma
-                    sc.next().replace('_', ' '), //Ten
-                    sc.next()//Gia
-                });
-            }
-            sc.close();
-        }catch(Exception e){
-
-        }*/
-        t.setVisible(true);
-
-    }//GEN-LAST:event_btnmilkteaActionPerformed
-    private final coffe cf = new coffe(this, rootPaneCheckingEnabled);
     private void cafeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cafeActionPerformed
         // TODO add your handling code here:c#
+      coffe c = new coffe(this, rootPaneCheckingEnabled);
 
-        cf.setVisible(true);
+        c.setVisible(true);
     }//GEN-LAST:event_cafeActionPerformed
-    private cake n = new cake(this, true);
-    private void cakeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cakeActionPerformed
+private final milktea t = new milktea(this, rootPaneCheckingEnabled);
+    private void btnmilkteaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmilkteaActionPerformed
+
+        t.setVisible(true);
+    }//GEN-LAST:event_btnmilkteaActionPerformed
+
+    private void billActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_billActionPerformed
         // TODO add your handling code here:
 
-        n.setVisible(true);
-    }//GEN-LAST:event_cakeActionPerformed
+
+    }//GEN-LAST:event_billActionPerformed
 
     /**
      * @param args the command line arguments
@@ -310,13 +352,16 @@ public class user extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bill;
     private javax.swing.JButton btnmilktea;
     private javax.swing.JButton cafe;
     private javax.swing.JButton cake;
+    private javax.swing.JButton delete;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JButton logout;
     private javax.swing.JButton save;
     private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables

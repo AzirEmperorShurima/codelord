@@ -14,7 +14,7 @@ public class size_box {
     public static List<String> getdata() {
         data.add("small");
         data.add("big");
-        data.add("nomarl");
+        data.add("normal");
         return data;
     }
 

@@ -6,10 +6,13 @@ package background;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.List;
 import java.util.Scanner;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 /**
@@ -24,13 +27,45 @@ public class cake extends javax.swing.JDialog {
     private String namee;
     private String costt;
     private final user users;
+
     public cake(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+
         initComponents();
         setLocationRelativeTo(null);
-        users = (user)parent;
-        showdata1();
-        fomat();
+        users = (user) parent;
+        showdat();
+        name.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                String choose = (String) name.getSelectedItem();
+                String type = (String) size.getSelectedItem();
+                try {
+                    Scanner sc = new Scanner(new FileReader("cakes.txt"));
+                    while (sc.hasNextLine()) {
+                        String temp = sc.next();
+                        if (temp.equals(choose)) {
+                            if (type.equalsIgnoreCase("normal")) {
+                                cost.setText(sc.next());
+                            } else if (type.equalsIgnoreCase("big")) {
+                                int tem = Integer.parseInt(sc.next()) + 10000;
+                                String pr = Integer.toString(tem);
+                                cost.setText(pr);
+
+                            } else {
+                                int tem = Integer.parseInt(sc.next()) - 5000;
+                                String pr = Integer.toString(tem);
+                                cost.setText(pr);
+                            }
+
+                        }
+//            
+                    }
+                } catch (Exception e) {
+                }
+            }
+        });
+        size.addActionListener(name);
+
         try {
             Scanner sc = new Scanner(new FileReader("cakes.txt"));
             while (sc.hasNextLine()) {
@@ -42,28 +77,33 @@ public class cake extends javax.swing.JDialog {
 
         } catch (Exception e) {
         }
+        fomat();
+
     }
-     private void showdata1(){
-        List<String> data = size_box.getdata();
+
+    private void showdat() {
+        List<String> data = ty.getdata();
         for (String string : data) {
             size.addItem(string);
         }
     }
-     private void fomat(){
-        
+
+    private void fomat() {
+
         add.setText("Add Item");
         add.setBackground(Color.pink);
-        add.setFont(new Font(" ",Font.BOLD,15));
+        add.setFont(new Font(" ", Font.BOLD, 15));
         add.setForeground(Color.yellow);
         close.setText(" Close ");
         close.setBackground(Color.black);
-        close.setFont(new Font(" ",Font.BOLD,15));
+        close.setFont(new Font(" ", Font.BOLD, 15));
         close.setForeground(Color.yellow);
         jLabel1.setText("Number Item : ");
         jLabel1.setForeground(Color.red);
-        jLabel1.setFont(new Font("",Font.BOLD,15));
+        jLabel1.setFont(new Font("", Font.BOLD, 15));
     }
-       private static boolean isNumeric(String str) {
+
+    private static boolean isNumeric(String str) {
         try {
             Integer.parseInt(str);
             return true;
@@ -71,7 +111,6 @@ public class cake extends javax.swing.JDialog {
             return false;
         }
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -88,7 +127,6 @@ public class cake extends javax.swing.JDialog {
         add = new javax.swing.JButton();
         close = new javax.swing.JButton();
         name = new javax.swing.JComboBox<>();
-        display = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -117,13 +155,6 @@ public class cake extends javax.swing.JDialog {
             }
         });
 
-        display.setText("jButton1");
-        display.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                displayActionPerformed(evt);
-            }
-        });
-
         jLabel1.setText("jLabel1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -131,9 +162,7 @@ public class cake extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(73, 73, 73)
-                .addComponent(display)
-                .addGap(57, 57, 57)
+                .addGap(205, 205, 205)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(close)
                     .addComponent(add))
@@ -169,9 +198,7 @@ public class cake extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(add)
-                    .addComponent(display))
+                .addComponent(add)
                 .addGap(26, 26, 26)
                 .addComponent(close)
                 .addContainerGap(39, Short.MAX_VALUE))
@@ -182,13 +209,13 @@ public class cake extends javax.swing.JDialog {
 
     private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
         // TODO add your handling code here:
-         String Name = "";
+        String Name = "";
         double costs = 0;
         int nums = 0;
         boolean done = true;
 
         Name = (String) name.getSelectedItem();
-          String type = (String) size.getSelectedItem();
+        String type = (String) size.getSelectedItem();
 
         try {
             nums = Integer.parseInt(num.getText());
@@ -203,7 +230,7 @@ public class cake extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, " complete");
 
         }
-    }                                   
+    }
 
     /**
      * @param args the command line arguments
@@ -252,27 +279,6 @@ public class cake extends javax.swing.JDialog {
         dispose();
     }//GEN-LAST:event_closeActionPerformed
 
-    private void displayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_displayActionPerformed
-        // TODO add your handling code here:
-         String choose = (String) name.getSelectedItem();
-        int count = name.getItemCount();
-        String[] nameItem = new String[count];
-        String[] money = new String[count];
-        try {
-            Scanner sc = new Scanner(new FileReader("cakes.txt"));
-            while (sc.hasNextLine()) {
-                String temp = sc.next();
-                if (temp.equals(choose)) {
-                    cost.setText(sc.next());
-                }
-//            
-            }
-        } catch (Exception e) {
-        }
-
-
-    }//GEN-LAST:event_displayActionPerformed
-
     private void nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nameActionPerformed
@@ -280,16 +286,18 @@ public class cake extends javax.swing.JDialog {
     /**
      * @param args the command line arguments
      */
-  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton add;
     private javax.swing.JButton close;
     private javax.swing.JTextField cost;
-    private javax.swing.JButton display;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JComboBox<String> name;
     private javax.swing.JTextField num;
-    private javax.swing.JComboBox<String> size;
+    javax.swing.JComboBox<String> size;
     // End of variables declaration//GEN-END:variables
+
+    private void Reset(JComboBox<String> size) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
